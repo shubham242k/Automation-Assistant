@@ -1,5 +1,5 @@
 //function for song, played for first time
-function playSong(browser,input){
+async function playSong(browser,input){
     return new Promise(async function(resolve,reject){
         let data = "";
         try{
@@ -12,8 +12,9 @@ function playSong(browser,input){
             resolve(true);
         }catch(error){
             console.log(error);
-            console.log(data +" not available");
-            reject(error);
+            resolve(false);
+            // console.log(data +" not available");
+            // reject(error);
 
         }
     })
@@ -32,7 +33,7 @@ async function playAnotherSong(browser,input,tab){
             resolve(true);
         }catch(error){
             console.log(error);
-            reject(error);
+            resolve(false);
         }
     });
 }
@@ -109,4 +110,9 @@ async function stopSong(browser,tab){
 
 
 
-module.exports = {playSong,pauseSong,resumeSong,stopSong,playAnotherSong};
+module.exports = {
+    playSong,
+    pauseSong,
+    resumeSong,
+    stopSong,
+    playAnotherSong};

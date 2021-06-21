@@ -15,21 +15,21 @@ async function createTest(browser){
                 total : 0
             }
             let problemLinks = [];
+            //until the all the valid ques get fetch(4 ques in this case), this loop will run
             while(problemLevel.total <= 4){
                 let quesLink = await fetchProblem(browser,randomLink,problemLevel);
-                console.log(problemLevel);
                 if(quesLink != undefined)
                     problemLinks.push(quesLink);
             }
-
-            console.log(problemLinks);
-            resolve();
+            resolve(true);
         }catch(err){
             reject(err);
         }
     })
 }
-
+//for every ques this function will run and helps to determine wether the ques is valid
+//validity here is defined as the like percentage of the problem which should be greater than 
+// 60%a and the there should be all type of ques(easy, medium, hard)
 async function fetchProblem(browser,randomLink,problemLevel){
     return new Promise(async function(resolve,reject){
         try{
@@ -38,9 +38,7 @@ async function fetchProblem(browser,randomLink,problemLevel){
             await npage.waitForSelector(".css-10o4wqw");
             let problemDetails = await npage.evaluate(async function(){
                 
-                console.log("here");
-                let box = document.querySelector(".css-10o4wqw");
-                console.log(box);
+                let box = document.querySelector(".css-10o4wqw");   
                 let levelTag = box.querySelector("div");
                 let level = levelTag.innerText;
                 let info = box.querySelectorAll("button");
@@ -51,14 +49,12 @@ async function fetchProblem(browser,randomLink,problemLevel){
 
                 return {level,famous};
             });
-            console.log(problemDetails);
-            
+            //if valid the problem tab will open and if not problem tab will close
             if(problemDetails.famous >= 60.0 && problemLevel[problemDetails.level] < 2){
                 let link = await npage.url();
                 problemLevel[problemDetails.level]++;
                 problemLevel.total++;
                 
-                console.log(link);
                 resolve(link);
             }else{
                 await npage.close();
