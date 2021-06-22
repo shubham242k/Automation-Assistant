@@ -1,7 +1,10 @@
 const chromeExeFilePath = 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe';
-const pup = require("puppeteer");
+
+const pup = require("puppeteer-extra");
+const StealthPlugin = require('puppeteer-extra-plugin-stealth')
+pup.use(StealthPlugin());
+
 const readLine = require("readline");
-//creating readline interface
 const rl = readLine.createInterface({
     input: process.stdin,
     output: process.stdout,
@@ -11,13 +14,15 @@ const rl = readLine.createInterface({
 let music = require("./music.js");
 let test = require("./test.js");
 let map = require("./direction.js");
+let calendar = require("./calendar.js");
 //songInfo will contains the information that will help to play, pause, resume and stop the song in the same tab
 let songInfo = {
     songTabIndex : -1,
     isPlaying : false,
 };
 
-
+let email = "shubhamraju441@gmail.com";
+let password = "greatestofalltime";
 //launching browser
 (async function(){
     let executablePath = chromeExeFilePath;
@@ -94,13 +99,13 @@ let songInfo = {
         }
         //create test on leetcode
         else if(input.includes("create")){
-            await test.createTest(browser);
+            await test.createTest(browser,input);
         }
         //open map and get you direction between source and destination
         else if(input.includes("get direction")){
             let idx= await findTab("maps");
             if(idx == -1){
-                map.getDirection(browser,input);
+               await map.getDirection(browser,input);
             }
             console.log(idx);
         }
@@ -133,7 +138,15 @@ let songInfo = {
             }else{
                 console.log("cant add stop to empty map");
             }
-           console.log(idx);
+        }
+        //add task to the calendar(just for current day)
+        else if(input.includes("add task")){
+            let idx = await findTab("calendar");
+            if(idx == -1){
+                await calendar.addEvent(browser,email,password,input);
+            }else{
+                await calendar.addOtherEvent(browser,input,idx)
+            }
         }
         //open browser
         else if(input.includes("open")){

@@ -1,26 +1,33 @@
-async function createTest(browser){
+async function createTest(browser,input){
     return new Promise(async function(resolve,reject){
         try{
+            let data = Number(input.split("create test ").pop());
+            if(data == undefined || data < 4){
+                data = 4;
+            }
             let page = await browser.newPage();
             await page.goto("https://leetcode.com/problemset/all/");
             let randomLink = await page.evaluate(function(){
                 let link = document.querySelector(".btn.btn-default.btn-md").getAttribute("href");
                 return "https://leetcode.com" + link;
             });
-            
+            let easyandHard = Math.ceil(0.25 * data);
             let problemLevel = {
-                Easy : 0,
-                Medium : 0,
-                Hard : 0,
+                Easy : easyandHard,
+                Medium : data - 2 *easyandHard,
+                Hard : easyandHard,
                 total : 0
             }
+            console.log(problemLevel);
             let problemLinks = [];
             //until the all the valid ques get fetch(4 ques in this case), this loop will run
-            while(problemLevel.total <= 4){
+            while(problemLevel.total < data){
                 let quesLink = await fetchProblem(browser,randomLink,problemLevel);
                 if(quesLink != undefined)
                     problemLinks.push(quesLink);
             }
+
+            await page.close();
             resolve(true);
         }catch(err){
             reject(err);
@@ -50,9 +57,9 @@ async function fetchProblem(browser,randomLink,problemLevel){
                 return {level,famous};
             });
             //if valid the problem tab will open and if not problem tab will close
-            if(problemDetails.famous >= 60.0 && problemLevel[problemDetails.level] < 2){
+            if(problemDetails.famous >= 60.0 && problemLevel[problemDetails.level] > 0){
                 let link = await npage.url();
-                problemLevel[problemDetails.level]++;
+                problemLevel[problemDetails.level]--;
                 problemLevel.total++;
                 
                 resolve(link);
