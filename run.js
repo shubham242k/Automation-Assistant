@@ -11,10 +11,10 @@ const rl = readLine.createInterface({
     prompt: "assistant ~ ",
 });
 
-let music = require("./music.js");
-let test = require("./test.js");
-let map = require("./direction.js");
-let calendar = require("./calendar.js");
+let music = require("../files/music.js");
+let test = require("../files/test.js");
+let map = require("../files/direction.js");
+let calendar = require("../files/calendar.js");
 //songInfo will contains the information that will help to play, pause, resume and stop the song in the same tab
 let songInfo = {
     songTabIndex : -1,
@@ -99,7 +99,7 @@ let password = "greatestofalltime";
         }
         //create test on leetcode
         else if(input.includes("create")){
-            await test.createTest(browser,input);
+            test.createTest(browser,input);
         }
         //open map and get you direction between source and destination
         else if(input.includes("get direction")){

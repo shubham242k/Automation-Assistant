@@ -1,0 +1,82 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh;
+    background-color: #0D2231;
+    overflow: hidden;
+}
+
+div.main{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
+.sides{
+    width: 50%;
+    margin: 20px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+  display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    /* background-color: #031323; */
+}
+
+
+input{
+    bottom: 0;
+    height: 70px;
+    border-radius: 8px;
+    background-color: #d6ebfa;
+    width: 100hv;
+    margin-top: 20px;
+    font-size: 20px;
+    padding-left: 20px;
+}
+
+.history{
+    top: 0;
+    margin-top: 10px;
+    border-radius: 10px;
+    box-shadow: 0 3px 6px 0 rgba(2, 26, 37, 0.815), 0 6px 20px 0 rgba(7, 35, 48, 0.815);
+    background-color: #031323;
+    padding: 10px;
+    height: 100%;
+}
+
+.current-commands{
+    display: flex;
+    flex-direction: column;
+    
+    top: 0;
+    margin-top: 10px;
+    border-radius: 10px;
+    box-shadow: 0 3px 6px 0 rgba(2, 26, 37, 0.815), 0 6px 20px 0 rgba(7, 35, 48, 0.815);
+    background-color: #031323;
+    height: 100vh;
+    padding: 0px 20px;
+}
+
+h2{
+    color: white;
+    font-size: 30px;
+    font-weight: 500;
+    letter-spacing: 8px;
+}
+
+div p{
+    font-size: 15px;
+    font-weight: 300;
+    color: #b0b5b8;
+}
+
+span{
+    font-weight: 500;
+    font-size: 15px;
+    color: #ffffff;
+}
