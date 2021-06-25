@@ -35,9 +35,38 @@ let password = "greatestofalltime";
     });
 
     //creating promt and taking actions on the input
+    let npage = await browser.pages();
+    
+    await npage[0].goto("file://E:/Hackathon/Automation-Hackathon/try.html");
+    let context = await browser.defaultBrowserContext();
+    await context.overridePermissions(
+        "file://E:/Hackathon/Automation-Hackathon/try.html", ["microphone", "camera", "notifications"]
+    );
+    npage[0].exposeFunction('puppeteerMutationListener', puppeteerMutationListener);
+
+    await npage[0].evaluate(function(){
+        const target = document.querySelector("ol");
+        const config = { childList: true, subtree: true };
+        const observer = new MutationObserver(function(mutationsList) {
+            for(let mutation of mutationsList) {
+                if (mutation.type === 'childList') {
+                    puppeteerMutationListener(mutation.addedNodes[0].textContent);
+                }
+            }
+        });
+        observer.observe(target, config);
+    });
+    function puppeteerMutationListener(input) {
+        task(input);
+    }
     rl.prompt();
+    
     rl.on("line",async function(input){
-        //to play new song
+       await task(input);
+        rl.prompt();
+
+    })
+    async function task(input){
         if(input.includes("play")){
             songInfo.songTabIndex = await findTab("wynk.in/music");
             if(songInfo.songTabIndex == -1){
@@ -48,8 +77,6 @@ let password = "greatestofalltime";
                 let successStat = await music.playAnotherSong(browser,input,songInfo.songTabIndex);
                 songInfo.isPlaying = successStat;
             }
-            
-        
         }
         //pause the already playing song in the same tab
         else if(input.includes("pause")){
@@ -166,11 +193,9 @@ let password = "greatestofalltime";
             console.log('assistant does not support "' + input + '" command');
         }
         
-        // console.log(mapInfo);
-        rl.prompt();
+    } 
 
-    })
-async function findTab(link){
+    async function findTab(link){
     return new Promise(async function(resolve,reject){
         let pages = await browser.pages();
         console.log(pages.length);
@@ -179,7 +204,9 @@ async function findTab(link){
         }
         resolve(-1);
     })
-}
+    }
+
+
 })();
 
 

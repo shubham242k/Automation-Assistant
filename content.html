@@ -7,18 +7,29 @@
     <link rel="stylesheet" href="try.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
     <title>Document</title>
 </head>
 <body>
     <div class="main">
-        <div class="sides">
+        <div class="left sides">
             <div class="history">
-                <ul>
-                    
-                </ul>
+               <ol id="history-list">
+               </ol>
             </div>
-            <input type="text" name="command" id="input" placeholder="Enter command or use voice recognition">
+            <div class="work-box">
+                <input type="text" name="command" id="input" placeholder="Enter command or use voice recognition">
+                <button class = "text"type="submit">OK</button>
+                <button  class = "speech" type="submit">
+                    <span class="material-icons">mic</span>
+                </button>
+            </div>
+           
         </div>
     
         <div class="sides">
@@ -35,9 +46,11 @@
                 <p><span>Add destination </span>, <span>New Location. </span></p>
                 <p><span>Change destination </span>, <span>New Location. </span></p>
                 <p><span>Remove Location </span>, <span>Location. </span></p>
-                <p><span>Add task, </span><span>Task's information</span>,<span>Timing (2pm or 12am)</span> (Only add task for today)</p>
+                <p><span>Add task, </span><span>Task's information</span>,<span>Timing (Eg: 2pm or 12am)</span> (Only add task for today)</p>
             </div>
         </div>
     </div>
+    <script src="try.js
+    "></script>
 </body>
 </html>
