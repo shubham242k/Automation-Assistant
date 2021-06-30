@@ -32,7 +32,9 @@ let password = "greatestofalltime";
         headless:false,
         slowMo:100,
         defaultViewport:null,
-        args:["--start-maximized"],
+        args:[
+            '--start-maximized'
+        ]
     });
 
     //creating promt and taking actions on the input
@@ -155,15 +157,17 @@ let password = "greatestofalltime";
                 else if(input.includes("get direction")){
                     let idx= await findTab("maps");
                     if(idx == -1){
-                       result = await map.getDirection(browser,input);
+                         map.getDirection(browser,input);
                     }
+                    result = true;
                     console.log(idx);
                 }
                 //change destination 
                 else if(input.includes("change destination")){
                     let idx = await findTab("maps");
                     if(idx != -1){
-                     result = await map.changeDestination(browser,idx,input);
+                     map.changeDestination(browser,idx,input);
+                     result = true;
                     }else{
                         console.log("No direction is loaded");
                     }
