@@ -75,7 +75,6 @@ button:hover {
 .current-commands{
     display: flex;
     flex-direction: column;
-
     top: 0;
     margin-top: 10px;
     border-radius: 10px;
@@ -96,6 +95,7 @@ div p{
     font-size: 15px;
     font-weight: 300;
     color: #b0b5b8;
+    user-select: none;
 }
 
 p > span{
@@ -131,7 +131,7 @@ li {
 .time{
     color: #464e57;
     font-family: 'Roboto Mono', monospace;
-    margin-right: 25px;
+    margin-right: 10px;
     font-size: 13px;
 }
 
@@ -158,4 +158,17 @@ li {
   
     /* Support for IE. */
     font-feature-settings: 'liga';
+  }
+
+  .output{
+    color: #464e57;
+    font-size: 10px;
+    padding: 10px 10px;
+    margin-right: 35px;
+    
+
+    
+  }
+  .output:last-child{
+      border-bottom: 1px solid rgba(8, 33, 66, 0.712);
   }

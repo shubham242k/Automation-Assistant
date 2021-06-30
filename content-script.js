@@ -11,12 +11,12 @@ buttonText.addEventListener("click",function(){
     if(task != ''){
         input.value = "";
         let time = new Date().toLocaleTimeString().split(":");
-        let atime = time.shift()+ ":" +time.shift();
+        let atime = time.shift()+ ":" +time.shift() ;
         let li = document.createElement("li");
         
         let span1 = document.createElement("span");
         span1.className = "time";
-        span1.innerText = atime + " ";
+        span1.innerText = atime  + " ~ ";
         console.log(span1);
         li.append(span1);
 
@@ -69,7 +69,7 @@ function voiceWork(){
             
             let span1 = document.createElement("span");
             span1.className = "time";
-            span1.innerText = atime;
+            span1.innerText = atime   + " ~ ";
             console.log(span1);
             li.append(span1);
     
